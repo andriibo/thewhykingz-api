@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  api:
+    build: ./docker
+    restart: always
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - db
+  db:
+     image: mysql:8
+     restart: always
+     command: mysqld --default-authentication-plugin=mysql_native_password
+  phpmyadmin:
+     image: phpmyadmin/phpmyadmin:5
+     restart: always
+     environment:
+        PMA_HOST: db
+     depends_on:
+        - db

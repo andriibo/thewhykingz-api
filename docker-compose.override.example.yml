@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  api:
+    container_name: thewhykingz.api
+    ports:
+      - 8081:8000
+  db:
+    container_name: thewhykingz.db
+    volumes:
+      - ./backup/mysql:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: password1
+      MYSQL_USER: thewhykingz
+      MYSQL_PASSWORD: password2
+      MYSQL_DATABASE: thewhykingz
+  phpmyadmin:
+    container_name: thewhykingz.phpmyadmin
+    ports:
+      - 8070:80
+    environment:
+      UPLOAD_LIMIT: 128M
